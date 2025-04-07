@@ -1,0 +1,341 @@
+stas@ubuntu-desk:~/ansible/mnt-homeworks/08-ansible-02-playbook/playbook$ docker run -d --name clickhouse-01 --network host my-ubuntu-ansible2 /bin/sh -c "while true; do sleep 3600; done"
+57524d569fca5a000aa7416e34550e4b412a9e653418cb34e784d2c1b80017c5
+stas@ubuntu-desk:~/ansible/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml
+
+PLAY [Install Clickhouse] ******************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: The "docker" connection plugin has an improperly configured remote target value, forcing "inventory_hostname" templated value instead of the string
+[WARNING]: Platform linux on host clickhouse-01 is using the discovered Python interpreter at /usr/bin/python3.8, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [clickhouse-01]
+
+TASK [Check installed ClickHouse version] **************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Set fact for ClickHouse version match] ***********************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Install prerequisites] ***************************************************************************************************************************************************************************
+changed: [clickhouse-01]
+
+TASK [Download ClickHouse packages] ********************************************************************************************************************************************************************
+changed: [clickhouse-01] => (item={'name': 'clickhouse-common-static', 'arch': 'amd64'})
+changed: [clickhouse-01] => (item={'name': 'clickhouse-client', 'arch': 'all'})
+changed: [clickhouse-01] => (item={'name': 'clickhouse-server', 'arch': 'all'})
+
+TASK [Install ClickHouse packages] *********************************************************************************************************************************************************************
+changed: [clickhouse-01] => (item={'name': 'clickhouse-common-static', 'arch': 'amd64'})
+changed: [clickhouse-01] => (item={'name': 'clickhouse-client', 'arch': 'all'})
+changed: [clickhouse-01] => (item={'name': 'clickhouse-server', 'arch': 'all'})
+
+TASK [Clean up downloaded packages] ********************************************************************************************************************************************************************
+changed: [clickhouse-01] => (item={'name': 'clickhouse-common-static', 'arch': 'amd64'})
+changed: [clickhouse-01] => (item={'name': 'clickhouse-client', 'arch': 'all'})
+changed: [clickhouse-01] => (item={'name': 'clickhouse-server', 'arch': 'all'})
+
+TASK [Ensure ClickHouse service is started] ************************************************************************************************************************************************************
+changed: [clickhouse-01]
+
+TASK [Create database] *********************************************************************************************************************************************************************************
+changed: [clickhouse-01]
+
+PLAY [Install and configure Vector] ********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Check installed Vector version] ******************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Set fact for Vector version match] ***************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Install Vector prerequisites] ********************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Download Vector package] *************************************************************************************************************************************************************************
+changed: [clickhouse-01]
+
+TASK [Install Vector package] **************************************************************************************************************************************************************************
+changed: [clickhouse-01]
+
+TASK [Clean up Vector package] *************************************************************************************************************************************************************************
+changed: [clickhouse-01]
+
+TASK [Ensure Vector config directory exists] ***********************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Ensure Vector log directory exists] **************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Deploy Vector configuration] *********************************************************************************************************************************************************************
+changed: [clickhouse-01]
+
+TASK [Check if Vector is already running] **************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Run Vector in background with nohup] *************************************************************************************************************************************************************
+changed: [clickhouse-01]
+
+RUNNING HANDLER [Ensure Vector is running] *************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+RUNNING HANDLER [Verify Vector is running] *************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+PLAY RECAP *********************************************************************************************************************************************************************************************
+clickhouse-01              : ok=21   changed=11   unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+
+stas@ubuntu-desk:~/ansible/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml --check
+
+PLAY [Install Clickhouse] ******************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: The "docker" connection plugin has an improperly configured remote target value, forcing "inventory_hostname" templated value instead of the string
+[WARNING]: Platform linux on host clickhouse-01 is using the discovered Python interpreter at /usr/bin/python3.8, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [clickhouse-01]
+
+TASK [Check installed ClickHouse version] **************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Set fact for ClickHouse version match] ***********************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Install prerequisites] ***************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Download ClickHouse packages] ********************************************************************************************************************************************************************
+changed: [clickhouse-01] => (item={'name': 'clickhouse-common-static', 'arch': 'amd64'})
+changed: [clickhouse-01] => (item={'name': 'clickhouse-client', 'arch': 'all'})
+changed: [clickhouse-01] => (item={'name': 'clickhouse-server', 'arch': 'all'})
+
+TASK [Install ClickHouse packages] *********************************************************************************************************************************************************************
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-common-static', 'arch': 'amd64'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-client', 'arch': 'all'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-server', 'arch': 'all'}) 
+skipping: [clickhouse-01]
+
+TASK [Clean up downloaded packages] ********************************************************************************************************************************************************************
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-common-static', 'arch': 'amd64'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-client', 'arch': 'all'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-server', 'arch': 'all'}) 
+skipping: [clickhouse-01]
+
+TASK [Ensure ClickHouse service is started] ************************************************************************************************************************************************************
+changed: [clickhouse-01]
+
+TASK [Create database] *********************************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+PLAY [Install and configure Vector] ********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Check installed Vector version] ******************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Set fact for Vector version match] ***************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Install Vector prerequisites] ********************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Download Vector package] *************************************************************************************************************************************************************************
+changed: [clickhouse-01]
+
+TASK [Install Vector package] **************************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Clean up Vector package] *************************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Ensure Vector config directory exists] ***********************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Ensure Vector log directory exists] **************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Deploy Vector configuration] *********************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Check if Vector is already running] **************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Run Vector in background with nohup] *************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+PLAY RECAP *********************************************************************************************************************************************************************************************
+clickhouse-01              : ok=12   changed=3    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0   
+
+stas@ubuntu-desk:~/ansible/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml --diff
+
+PLAY [Install Clickhouse] ******************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: The "docker" connection plugin has an improperly configured remote target value, forcing "inventory_hostname" templated value instead of the string
+[WARNING]: Platform linux on host clickhouse-01 is using the discovered Python interpreter at /usr/bin/python3.8, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [clickhouse-01]
+
+TASK [Check installed ClickHouse version] **************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Set fact for ClickHouse version match] ***********************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Install prerequisites] ***************************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Download ClickHouse packages] ********************************************************************************************************************************************************************
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-common-static', 'arch': 'amd64'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-client', 'arch': 'all'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-server', 'arch': 'all'}) 
+skipping: [clickhouse-01]
+
+TASK [Install ClickHouse packages] *********************************************************************************************************************************************************************
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-common-static', 'arch': 'amd64'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-client', 'arch': 'all'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-server', 'arch': 'all'}) 
+skipping: [clickhouse-01]
+
+TASK [Clean up downloaded packages] ********************************************************************************************************************************************************************
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-common-static', 'arch': 'amd64'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-client', 'arch': 'all'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-server', 'arch': 'all'}) 
+skipping: [clickhouse-01]
+
+TASK [Ensure ClickHouse service is started] ************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Create database] *********************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+PLAY [Install and configure Vector] ********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Check installed Vector version] ******************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Set fact for Vector version match] ***************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Install Vector prerequisites] ********************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Download Vector package] *************************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Install Vector package] **************************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Clean up Vector package] *************************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Ensure Vector config directory exists] ***********************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Ensure Vector log directory exists] **************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Deploy Vector configuration] *********************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Check if Vector is already running] **************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Run Vector in background with nohup] *************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+PLAY RECAP *********************************************************************************************************************************************************************************************
+clickhouse-01              : ok=11   changed=0    unreachable=0    failed=0    skipped=10   rescued=0    ignored=0   
+
+stas@ubuntu-desk:~/ansible/mnt-homeworks/08-ansible-02-playbook/playbook$ ansible-playbook -i inventory/prod.yml site.yml
+
+PLAY [Install Clickhouse] ******************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: The "docker" connection plugin has an improperly configured remote target value, forcing "inventory_hostname" templated value instead of the string
+[WARNING]: Platform linux on host clickhouse-01 is using the discovered Python interpreter at /usr/bin/python3.8, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [clickhouse-01]
+
+TASK [Check installed ClickHouse version] **************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Set fact for ClickHouse version match] ***********************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Install prerequisites] ***************************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Download ClickHouse packages] ********************************************************************************************************************************************************************
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-common-static', 'arch': 'amd64'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-client', 'arch': 'all'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-server', 'arch': 'all'}) 
+skipping: [clickhouse-01]
+
+TASK [Install ClickHouse packages] *********************************************************************************************************************************************************************
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-common-static', 'arch': 'amd64'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-client', 'arch': 'all'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-server', 'arch': 'all'}) 
+skipping: [clickhouse-01]
+
+TASK [Clean up downloaded packages] ********************************************************************************************************************************************************************
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-common-static', 'arch': 'amd64'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-client', 'arch': 'all'}) 
+skipping: [clickhouse-01] => (item={'name': 'clickhouse-server', 'arch': 'all'}) 
+skipping: [clickhouse-01]
+
+TASK [Ensure ClickHouse service is started] ************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Create database] *********************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+PLAY [Install and configure Vector] ********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Check installed Vector version] ******************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Set fact for Vector version match] ***************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Install Vector prerequisites] ********************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Download Vector package] *************************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Install Vector package] **************************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Clean up Vector package] *************************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+TASK [Ensure Vector config directory exists] ***********************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Ensure Vector log directory exists] **************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Deploy Vector configuration] *********************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Check if Vector is already running] **************************************************************************************************************************************************************
+ok: [clickhouse-01]
+
+TASK [Run Vector in background with nohup] *************************************************************************************************************************************************************
+skipping: [clickhouse-01]
+
+PLAY RECAP *********************************************************************************************************************************************************************************************
+clickhouse-01              : ok=11   changed=0    unreachable=0    failed=0    skipped=10   rescued=0    ignored=0   
+
+stas@ubuntu-desk:~/ansible/mnt-homeworks/08-ansible-02-playbook/playbook$ docker container stop clickhouse-01 
