@@ -1,0 +1,15 @@
+[sources.test_logs]
+type = "file"
+include = ["/tmp/test.log"]
+
+[sinks.clickhouse]
+type = "clickhouse"
+inputs = ["test_logs"]  # Убрали transforms.parse_logs
+endpoint = "http://localhost:8123"
+database = "logs"
+table = "system_logs"
+compression = "gzip"
+
+[sinks.clickhouse.encoding]
+timestamp_format = "rfc3339"
+only_fields = ["timestamp", "message", "host"]

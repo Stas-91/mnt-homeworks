@@ -1,36 +1,148 @@
----
 - name: Install Clickhouse
   hosts: clickhouse
-  handlers:
-    - name: Start clickhouse service
-      become: true
+  tasks:
+    - name: Check installed ClickHouse version
+      ansible.builtin.command: "clickhouse-client --version"
+      register: clickhouse_version_check
+      failed_when: false
+      changed_when: false
+
+    - name: Set fact for ClickHouse version match
+      ansible.builtin.set_fact:
+        clickhouse_version_matches: "{{ clickhouse_version_check.rc == 0 and ch_ver in clickhouse_version_check.stdout }}"
+      when: clickhouse_version_check.rc == 0 or clickhouse_version_check.rc == 127
+
+    - name: Install prerequisites
+      ansible.builtin.apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+        state: present
+        update_cache: true
+      when: clickhouse_version_matches is not defined or not clickhouse_version_matches
+
+    - name: Download ClickHouse packages
+      ansible.builtin.get_url:
+        url: "{{ ch_url }}/{{ ch_path }}/{{ item.name }}_{{ ch_ver }}_{{ item.arch }}.deb/download.deb?{{ ch_q }}"
+        dest: "/tmp/{{ item.name }}_{{ ch_ver }}_{{ item.arch }}.deb"
+        mode: '0644'
+      loop: "{{ clickhouse_packages }}"
+      when: clickhouse_version_matches is not defined or not clickhouse_version_matches
+
+    - name: Install ClickHouse packages
+      ansible.builtin.apt:
+        deb: "/tmp/{{ item.name }}_{{ ch_ver }}_{{ item.arch }}.deb"
+      loop: "{{ clickhouse_packages }}"
+      when:
+        - clickhouse_version_matches is not defined or not clickhouse_version_matches
+        - not ansible_check_mode
+
+    - name: Clean up downloaded packages
+      ansible.builtin.file:
+        path: "/tmp/{{ item.name }}_{{ ch_ver }}_{{ item.arch }}.deb"
+        state: absent
+      loop: "{{ clickhouse_packages }}"
+      when: (clickhouse_version_matches is not defined or not clickhouse_version_matches) and not ansible_check_mode
+
+    - name: Ensure ClickHouse service is started
       ansible.builtin.service:
         name: clickhouse-server
-        state: restarted
-  tasks:
-    - block:
-        - name: Get clickhouse distrib
-          ansible.builtin.get_url:
-            url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
-            dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
-          with_items: "{{ clickhouse_packages }}"
-      rescue:
-        - name: Get clickhouse distrib
-          ansible.builtin.get_url:
-            url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
-            dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
-    - name: Install clickhouse packages
-      become: true
-      ansible.builtin.yum:
-        name:
-          - clickhouse-common-static-{{ clickhouse_version }}.rpm
-          - clickhouse-client-{{ clickhouse_version }}.rpm
-          - clickhouse-server-{{ clickhouse_version }}.rpm
-      notify: Start clickhouse service
-    - name: Flush handlers
-      meta: flush_handlers
+        state: started
+        enabled: true
+      when: clickhouse_version_matches is not defined or not clickhouse_version_matches
+
     - name: Create database
       ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
       register: create_db
-      failed_when: create_db.rc != 0 and create_db.rc !=82
+      failed_when: create_db.rc != 0 and create_db.rc != 82
       changed_when: create_db.rc == 0
+- name: Install and configure Vector
+  hosts: clickhouse
+  tasks:
+    - name: Check installed Vector version
+      ansible.builtin.command: "vector --version"
+      register: vector_version_check
+      failed_when: false
+      changed_when: false
+
+    - name: Set fact for Vector version match
+      ansible.builtin.set_fact:
+        vector_version_matches: "{{ vector_version_check.rc == 0 and vector_version.split('-')[0] in vector_version_check.stdout }}"
+      when: vector_version_check.rc == 0 or vector_version_check.rc == 127
+
+    - name: Install Vector prerequisites
+      ansible.builtin.apt:
+        name:
+          - curl
+        state: present
+        update_cache: true
+      when: vector_version_matches is not defined or not vector_version_matches
+
+    - name: Download Vector package
+      ansible.builtin.get_url:
+        url: "{{ vector_url }}/vector_{{ vector_version }}_amd64.deb"
+        dest: "/tmp/vector_{{ vector_version }}_amd64.deb"
+        mode: '0644'
+      when: vector_version_matches is not defined or not vector_version_matches
+
+    - name: Install Vector package
+      ansible.builtin.apt:
+        deb: "/tmp/vector_{{ vector_version }}_amd64.deb"
+      when:
+        - vector_version_matches is not defined or not vector_version_matches
+        - not ansible_check_mode
+
+    - name: Clean up Vector package
+      ansible.builtin.file:
+        path: "/tmp/vector_{{ vector_version }}_amd64.deb"
+        state: absent
+      when: (vector_version_matches is not defined or not vector_version_matches) and not ansible_check_mode
+
+    - name: Ensure Vector config directory exists
+      ansible.builtin.file:
+        path: /etc/vector
+        state: directory
+        mode: '0755'
+
+    - name: Ensure Vector log directory exists
+      ansible.builtin.file:
+        path: /var/log
+        state: directory
+        mode: '0755'
+
+    - name: Deploy Vector configuration
+      ansible.builtin.template:
+        src: templates/vector.toml.j2
+        dest: /etc/vector/vector.toml
+        mode: '0644'
+      notify: Ensure Vector is running
+
+    - name: Check if Vector is already running
+      ansible.builtin.command: "pgrep -f 'vector --config /etc/vector/vector.toml'"
+      register: vector_running
+      failed_when: false
+      changed_when: false
+
+    - name: Run Vector in background with nohup
+      ansible.builtin.shell: "nohup vector --config /etc/vector/vector.toml > /var/log/vector.log 2>&1 & echo $! > /tmp/vector.pid"
+      args:
+        executable: /bin/bash
+      when: vector_running.rc != 0
+      register: vector_run
+      changed_when: vector_run.rc == 0
+      failed_when: vector_run.rc != 0
+      notify: Verify Vector is running
+
+  handlers:
+    - name: Ensure Vector is running
+      ansible.builtin.command: "pgrep -f 'vector --config /etc/vector/vector.toml'"
+      register: vector_check
+      failed_when: vector_check.rc != 0
+      changed_when: false
+
+    - name: Verify Vector is running
+      ansible.builtin.shell: "ps -p $(cat /tmp/vector.pid)"
+      register: vector_verify
+      failed_when: vector_verify.rc != 0
+      changed_when: false

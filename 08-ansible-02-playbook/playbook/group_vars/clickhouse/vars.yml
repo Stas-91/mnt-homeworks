@@ -1,6 +1,12 @@
 ---
-clickhouse_version: "22.3.3.44"
+# group_vars/clickhouse.yml
+ch_ver: "21.3.15.4.altinity+stable"  # ClickHouse version
+ch_url: "https://packagecloud.io/Altinity/altinity-stable"
+ch_path: "packages/ubuntu/focal"
+ch_q: "distro_version_id=210"  # Query param
 clickhouse_packages:
-  - clickhouse-client
-  - clickhouse-server
-  - clickhouse-common-static
+  - { name: "clickhouse-common-static", arch: "amd64" }
+  - { name: "clickhouse-client", arch: "all" }
+  - { name: "clickhouse-server", arch: "all" }
+vector_version: "0.45.0-1"
+vector_url: "https://apt.vector.dev/pool/v/ve"
