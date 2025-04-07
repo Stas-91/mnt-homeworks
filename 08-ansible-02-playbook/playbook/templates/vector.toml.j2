@@ -4,7 +4,7 @@ include = ["/tmp/test.log"]
 
 [sinks.clickhouse]
 type = "clickhouse"
-inputs = ["test_logs"]  # Убрали transforms.parse_logs
+inputs = ["test_logs"]
 endpoint = "http://localhost:8123"
 database = "logs"
 table = "system_logs"
