@@ -8,6 +8,7 @@
 
 ## Требования
 - Ansible (версия 2.9+)
+- Python на managed nodes
 - Доступ к хостам через Docker (настроен в `inventory/prod.yml`)
 - Утилиты: `curl`, `apt-transport-https`, `ca-certificates`
 
