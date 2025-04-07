@@ -32,3 +32,6 @@
 3. Запустите плейбук:
    ```bash
    ansible-playbook -i inventory/prod.yml site.yml
+   ```
+
+   Лог работы плейбука - [logs](logs.txt)
