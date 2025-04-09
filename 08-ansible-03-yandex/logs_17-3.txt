@@ -1,0 +1,269 @@
+Outputs:
+
+vm_ips = {
+  "clickhouse" = "51.250.77.177"
+  "lighthouse" = "89.169.144.86"
+  "vector" = "62.84.115.241"
+}
+stas@ubuntu-desk:~/ansible/mnt-homeworks/08-ansible-03-yandex$ ansible-playbook -i inventory/prod.yml playbook.yml
+
+PLAY [Deploy ClickHouse Infrastructure] ****************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host clickhouse_node is using the discovered Python interpreter at /usr/bin/python3.12, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [clickhouse_node]
+
+TASK [Add ClickHouse repository key] *******************************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+TASK [Add ClickHouse repository] ***********************************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+TASK [Update apt cache] ********************************************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+TASK [Install ClickHouse packages] *********************************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+TASK [Configure ClickHouse to listen on all interfaces] ************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+TASK [Ensure ClickHouse config has proper permissions] *************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Start ClickHouse service] ************************************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+TASK [Create ClickHouse database if not exists] ********************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+TASK [Create ClickHouse table if not exists] ***********************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+RUNNING HANDLER [Restart ClickHouse] *******************************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+PLAY [Deploy Vector Infrastructure] ********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host vector_node is using the discovered Python interpreter at /usr/bin/python3.12, but future installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [vector_node]
+
+TASK [Download Vector] *********************************************************************************************************************************************************************************
+changed: [vector_node]
+
+TASK [Install Vector] **********************************************************************************************************************************************************************************
+changed: [vector_node]
+
+TASK [Create Vector config directory] ******************************************************************************************************************************************************************
+ok: [vector_node]
+
+TASK [Deploy Vector configuration] *********************************************************************************************************************************************************************
+changed: [vector_node]
+
+TASK [Start Vector service] ****************************************************************************************************************************************************************************
+changed: [vector_node]
+
+PLAY [Deploy Lighthouse Infrastructure] ****************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host lighthouse_node is using the discovered Python interpreter at /usr/bin/python3.12, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [lighthouse_node]
+
+TASK [Install prerequisites] ***************************************************************************************************************************************************************************
+changed: [lighthouse_node]
+
+TASK [Clone Lighthouse repository] *********************************************************************************************************************************************************************
+changed: [lighthouse_node]
+
+TASK [Create Nginx configuration for Lighthouse] *******************************************************************************************************************************************************
+changed: [lighthouse_node]
+
+TASK [Enable Lighthouse site] **************************************************************************************************************************************************************************
+changed: [lighthouse_node]
+
+TASK [Ensure Nginx is started and enabled] *************************************************************************************************************************************************************
+ok: [lighthouse_node]
+
+RUNNING HANDLER [Restart Nginx] ************************************************************************************************************************************************************************
+changed: [lighthouse_node]
+
+PLAY RECAP *********************************************************************************************************************************************************************************************
+clickhouse_node            : ok=11   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+lighthouse_node            : ok=7    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+vector_node                : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+stas@ubuntu-desk:~/ansible/mnt-homeworks/08-ansible-03-yandex$ ansible-playbook -i inventory/prod.yml playbook.yml --check
+
+PLAY [Deploy ClickHouse Infrastructure] ****************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host clickhouse_node is using the discovered Python interpreter at /usr/bin/python3.12, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [clickhouse_node]
+
+TASK [Add ClickHouse repository key] *******************************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Add ClickHouse repository] ***********************************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Update apt cache] ********************************************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+TASK [Install ClickHouse packages] *********************************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Configure ClickHouse to listen on all interfaces] ************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Ensure ClickHouse config has proper permissions] *************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Start ClickHouse service] ************************************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Create ClickHouse database if not exists] ********************************************************************************************************************************************************
+skipping: [clickhouse_node]
+
+TASK [Create ClickHouse table if not exists] ***********************************************************************************************************************************************************
+skipping: [clickhouse_node]
+
+PLAY [Deploy Vector Infrastructure] ********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host vector_node is using the discovered Python interpreter at /usr/bin/python3.12, but future installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [vector_node]
+
+TASK [Download Vector] *********************************************************************************************************************************************************************************
+ok: [vector_node]
+
+TASK [Install Vector] **********************************************************************************************************************************************************************************
+ok: [vector_node]
+
+TASK [Create Vector config directory] ******************************************************************************************************************************************************************
+ok: [vector_node]
+
+TASK [Deploy Vector configuration] *********************************************************************************************************************************************************************
+ok: [vector_node]
+
+TASK [Start Vector service] ****************************************************************************************************************************************************************************
+ok: [vector_node]
+
+PLAY [Deploy Lighthouse Infrastructure] ****************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host lighthouse_node is using the discovered Python interpreter at /usr/bin/python3.12, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [lighthouse_node]
+
+TASK [Install prerequisites] ***************************************************************************************************************************************************************************
+ok: [lighthouse_node]
+
+TASK [Clone Lighthouse repository] *********************************************************************************************************************************************************************
+ok: [lighthouse_node]
+
+TASK [Create Nginx configuration for Lighthouse] *******************************************************************************************************************************************************
+ok: [lighthouse_node]
+
+TASK [Enable Lighthouse site] **************************************************************************************************************************************************************************
+ok: [lighthouse_node]
+
+TASK [Ensure Nginx is started and enabled] *************************************************************************************************************************************************************
+ok: [lighthouse_node]
+
+PLAY RECAP *********************************************************************************************************************************************************************************************
+clickhouse_node            : ok=8    changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+lighthouse_node            : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+vector_node                : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+stas@ubuntu-desk:~/ansible/mnt-homeworks/08-ansible-03-yandex$ ansible-playbook -i inventory/prod.yml playbook.yml --diff
+
+PLAY [Deploy ClickHouse Infrastructure] ****************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host clickhouse_node is using the discovered Python interpreter at /usr/bin/python3.12, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [clickhouse_node]
+
+TASK [Add ClickHouse repository key] *******************************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Add ClickHouse repository] ***********************************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Update apt cache] ********************************************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+TASK [Install ClickHouse packages] *********************************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Configure ClickHouse to listen on all interfaces] ************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Ensure ClickHouse config has proper permissions] *************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Start ClickHouse service] ************************************************************************************************************************************************************************
+ok: [clickhouse_node]
+
+TASK [Create ClickHouse database if not exists] ********************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+TASK [Create ClickHouse table if not exists] ***********************************************************************************************************************************************************
+changed: [clickhouse_node]
+
+PLAY [Deploy Vector Infrastructure] ********************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host vector_node is using the discovered Python interpreter at /usr/bin/python3.12, but future installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [vector_node]
+
+TASK [Download Vector] *********************************************************************************************************************************************************************************
+ok: [vector_node]
+
+TASK [Install Vector] **********************************************************************************************************************************************************************************
+ok: [vector_node]
+
+TASK [Create Vector config directory] ******************************************************************************************************************************************************************
+ok: [vector_node]
+
+TASK [Deploy Vector configuration] *********************************************************************************************************************************************************************
+ok: [vector_node]
+
+TASK [Start Vector service] ****************************************************************************************************************************************************************************
+ok: [vector_node]
+
+PLAY [Deploy Lighthouse Infrastructure] ****************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host lighthouse_node is using the discovered Python interpreter at /usr/bin/python3.12, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [lighthouse_node]
+
+TASK [Install prerequisites] ***************************************************************************************************************************************************************************
+ok: [lighthouse_node]
+
+TASK [Clone Lighthouse repository] *********************************************************************************************************************************************************************
+ok: [lighthouse_node]
+
+TASK [Create Nginx configuration for Lighthouse] *******************************************************************************************************************************************************
+ok: [lighthouse_node]
+
+TASK [Enable Lighthouse site] **************************************************************************************************************************************************************************
+ok: [lighthouse_node]
+
+TASK [Ensure Nginx is started and enabled] *************************************************************************************************************************************************************
+ok: [lighthouse_node]
+
+PLAY RECAP *********************************************************************************************************************************************************************************************
+clickhouse_node            : ok=10   changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+lighthouse_node            : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+vector_node                : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+stas@ubuntu-desk:~/ansible/mnt-homeworks/08-ansible-03-yandex$ 
