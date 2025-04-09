@@ -1,0 +1,155 @@
+---
+- name: Deploy ClickHouse Infrastructure
+  hosts: clickhouse_node
+  become: true
+  tags:
+    - clickhouse
+  tasks:
+    - name: Add ClickHouse repository key
+      ansible.builtin.apt_key:
+        keyserver: "keyserver.ubuntu.com"
+        id: "3E4AD4719DDE9A38"
+        state: present
+
+    - name: Add ClickHouse repository
+      ansible.builtin.apt_repository:
+        repo: "deb https://packages.clickhouse.com/deb stable main"
+        state: present
+
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Install ClickHouse packages
+      ansible.builtin.apt:
+        name:
+          - clickhouse-server
+          - clickhouse-client
+        state: present
+
+    - name: Configure ClickHouse to listen on all interfaces
+      ansible.builtin.blockinfile:
+        path: /etc/clickhouse-server/config.xml
+        insertbefore: "</clickhouse>"
+        block: |
+          <listen_host>0.0.0.0</listen_host>
+        marker: "<!-- {mark} ANSIBLE MANAGED BLOCK (listen_host) -->"
+      notify: Restart ClickHouse
+
+    - name: Ensure ClickHouse config has proper permissions
+      ansible.builtin.file:
+        path: /etc/clickhouse-server/config.xml
+        owner: clickhouse
+        group: clickhouse
+        mode: '0400'
+
+    - name: Start ClickHouse service
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: started
+        enabled: true
+
+    - name: Create ClickHouse database if not exists
+      ansible.builtin.shell: |
+        clickhouse-client --query "CREATE DATABASE IF NOT EXISTS logs"
+      register: create_db_result
+      changed_when: create_db_result.rc == 0 and "already exists" not in create_db_result.stderr
+      failed_when: create_db_result.rc != 0 and "already exists" not in create_db_result.stderr
+
+    - name: Create ClickHouse table if not exists
+      ansible.builtin.shell: |
+        clickhouse-client --query "CREATE TABLE IF NOT EXISTS logs.system_logs (
+          timestamp DateTime,
+          message String,
+          level String
+        ) ENGINE = MergeTree()
+        ORDER BY timestamp"
+      register: create_table_result
+      changed_when: create_table_result.rc == 0 and "already exists" not in create_table_result.stderr
+      failed_when: create_table_result.rc != 0 and "already exists" not in create_table_result.stderr
+
+  handlers:
+    - name: Restart ClickHouse
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: restarted
+
+- name: Deploy Vector Infrastructure
+  hosts: vector_node
+  become: true
+  tags:
+    - vector
+  tasks:
+    - name: Download Vector
+      ansible.builtin.get_url:
+        url: "https://apt.vector.dev/pool/v/ve/vector_{{ vector_version }}-1_amd64.deb"
+        dest: "/tmp/vector_{{ vector_version }}-1_amd64.deb"
+        mode: '0644'
+
+    - name: Install Vector
+      ansible.builtin.apt:
+        deb: "/tmp/vector_{{ vector_version }}-1_amd64.deb"
+
+    - name: Create Vector config directory
+      ansible.builtin.file:
+        path: /etc/vector
+        state: directory
+        mode: '0755'
+
+    - name: Deploy Vector configuration
+      ansible.builtin.template:
+        src: templates/vector.yml.j2
+        dest: /etc/vector/vector.yml
+        mode: '0644'
+
+    - name: Start Vector service
+      ansible.builtin.service:
+        name: vector
+        state: started
+        enabled: true
+
+- name: Deploy Lighthouse Infrastructure
+  hosts: lighthouse_node
+  become: true
+  tags:
+    - lighthouse
+  tasks:
+    - name: Install prerequisites
+      ansible.builtin.apt:
+        name:
+          - nginx
+          - git
+        state: present
+        update_cache: true
+
+    - name: Clone Lighthouse repository
+      ansible.builtin.git:
+        repo: "https://github.com/VKCOM/lighthouse.git"
+        dest: "/var/www/lighthouse"
+        version: master
+
+    - name: Create Nginx configuration for Lighthouse
+      ansible.builtin.template:
+        src: templates/lighthouse-nginx.conf.j2
+        dest: /etc/nginx/sites-available/lighthouse
+        mode: '0644'
+      notify: Restart Nginx
+
+    - name: Enable Lighthouse site
+      ansible.builtin.file:
+        src: /etc/nginx/sites-available/lighthouse
+        dest: /etc/nginx/sites-enabled/lighthouse
+        state: link
+      notify: Restart Nginx
+
+    - name: Ensure Nginx is started and enabled
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+  handlers:
+    - name: Restart Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted

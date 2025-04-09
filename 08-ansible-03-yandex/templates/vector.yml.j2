@@ -1,0 +1,13 @@
+data_dir: "/var/lib/vector"
+sources:
+  system_logs:
+    type: "file"
+    include: ["/var/log/syslog"]
+sinks:
+  to_clickhouse:
+    type: "clickhouse"
+    inputs: ["system_logs"]
+    endpoint: "http://{{ hostvars['clickhouse_node']['ansible_host'] }}:8123"
+    database: "logs"
+    table: "system_logs"
+    compression: "gzip"
