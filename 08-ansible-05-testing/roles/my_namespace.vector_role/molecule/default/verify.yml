@@ -1,0 +1,21 @@
+---
+- name: Verify Vector role
+  hosts: all
+  tasks:
+    - name: Check if Vector configuration is valid without connecting to endpoints
+      ansible.builtin.command: vector validate --no-environment /etc/vector/vector.yml
+      register: vector_config_validation
+      changed_when: false
+      failed_when: vector_config_validation.rc != 0
+
+    - name: Check if Vector service is running
+      ansible.builtin.systemd:
+        name: vector
+      register: vector_service_status
+      failed_when: vector_service_status.status.ActiveState != 'active'
+
+    - name: Verify Vector service is enabled
+      ansible.builtin.systemd:
+        name: vector
+      register: vector_service_enabled
+      failed_when: vector_service_enabled.status.UnitFileState != 'enabled'

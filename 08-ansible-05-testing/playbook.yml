@@ -1,0 +1,24 @@
+---
+- name: Deploy ClickHouse Infrastructure
+  hosts: clickhouse_node
+  become: true
+  tags:
+    - clickhouse
+  roles:
+    - my_namespace.clickhouse
+
+- name: Deploy Vector Infrastructure
+  hosts: vector_node
+  become: true
+  tags:
+    - vector
+  roles:
+    - my_namespace.vector_role
+
+- name: Deploy Lighthouse Infrastructure
+  hosts: lighthouse_node
+  become: true
+  tags:
+    - lighthouse
+  roles:
+    - my_namespace.lighthouse_role
