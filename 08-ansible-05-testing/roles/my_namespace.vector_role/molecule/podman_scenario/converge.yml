@@ -1,0 +1,5 @@
+---
+- name: Converge
+  hosts: vector_nodes
+  roles:
+    - role: my_namespace.vector_role

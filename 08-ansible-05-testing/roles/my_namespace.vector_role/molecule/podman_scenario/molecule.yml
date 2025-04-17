@@ -1,29 +1,32 @@
 dependency:
   name: galaxy
+
 driver:
-  name: docker
+  name: podman
+
 platforms:
   - name: ubuntu-instance
-    image: jrei/systemd-ubuntu:latest
+    image: docker.io/jrei/systemd-ubuntu:latest
     pre_build_image: true
     privileged: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
-    cgroupns_mode: host
     command: /sbin/init
     groups:
       - vector_nodes
+
   - name: debian-instance
-    image: geerlingguy/docker-debian11-ansible:latest
+    image: docker.io/geerlingguy/docker-debian11-ansible:latest
     pre_build_image: true
     privileged: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
-    cgroupns_mode: host
     command: /sbin/init
     groups:
       - vector_nodes
+
 provisioner:
   name: ansible
+
 verifier:
   name: ansible
