@@ -1,0 +1,425 @@
+stas@stas-ubuntu:~/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role$ tox
+py310: commands[0]> molecule test --scenario-name podman_scenario
+WARNING  Driver podman does not provide a schema.
+INFO     podman_scenario scenario test matrix: dependency, cleanup, destroy, syntax, create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
+INFO     Performing prerun with role_name_check=0...
+WARNING  Another version of 'amazon.aws' 7.5.0 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py310/lib/python3.10/site-packages/ansible_collections, only the first one will be used, 9.4.0 (/home/stas/.ansible/collections/ansible_collections).
+WARNING  Another version of 'ansible.posix' 1.5.4 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py310/lib/python3.10/site-packages/ansible_collections, only the first one will be used, 2.0.0 (/home/stas/.ansible/collections/ansible_collections).
+WARNING  Another version of 'community.docker' 3.9.0 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py310/lib/python3.10/site-packages/ansible_collections, only the first one will be used, 4.5.2 (/home/stas/.ansible/collections/ansible_collections).
+WARNING  Another version of 'community.general' 8.6.0 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py310/lib/python3.10/site-packages/ansible_collections, only the first one will be used, 10.5.0 (/home/stas/.ansible/collections/ansible_collections).
+WARNING  Another version of 'community.library_inventory_filtering_v1' 1.0.1 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py310/lib/python3.10/site-packages/ansible_collections, only the first one will be used, 1.0.2 (/home/stas/.ansible/collections/ansible_collections).
+WARNING  Another version of 'containers.podman' 1.13.0 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py310/lib/python3.10/site-packages/ansible_collections, only the first one will be used, 1.16.3 (/home/stas/.ansible/collections/ansible_collections).
+WARNING  Another version of 'kubernetes.core' 2.4.2 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py310/lib/python3.10/site-packages/ansible_collections, only the first one will be used, 5.2.0 (/home/stas/.ansible/collections/ansible_collections).
+INFO     Running podman_scenario > dependency
+WARNING  Skipping, missing the requirements file.
+WARNING  Skipping, missing the requirements file.
+INFO     Running podman_scenario > cleanup
+WARNING  Skipping, cleanup playbook not configured.
+INFO     Running podman_scenario > destroy
+INFO     Sanity checks: 'podman'
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Destroy molecule instance(s)] ********************************************
+changed: [localhost] => (item={'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/jrei/systemd-ubuntu:latest', 'name': 'ubuntu-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']})
+changed: [localhost] => (item={'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/geerlingguy/docker-debian11-ansible:latest', 'name': 'debian-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']})
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+changed: [localhost] => (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j431193453786.48765', 'results_file': '/home/stas/.ansible_async/j431193453786.48765', 'changed': True, 'item': {'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/jrei/systemd-ubuntu:latest', 'name': 'ubuntu-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']}, 'ansible_loop_var': 'item'})
+changed: [localhost] => (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j395182518085.48800', 'results_file': '/home/stas/.ansible_async/j395182518085.48800', 'changed': True, 'item': {'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/geerlingguy/docker-debian11-ansible:latest', 'name': 'debian-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']}, 'ansible_loop_var': 'item'})
+
+TASK [Delete podman network dedicated to this scenario] ************************
+skipping: [localhost] => (item=ubuntu-instance: None specified) 
+skipping: [localhost] => (item=debian-instance: None specified) 
+skipping: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+INFO     Running podman_scenario > syntax
+
+playbook: /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/molecule/podman_scenario/converge.yml
+INFO     Running podman_scenario > create
+
+PLAY [Create] ******************************************************************
+
+TASK [Log into a container registry] *******************************************
+skipping: [localhost] => (item="ubuntu-instance registry username: None specified") 
+skipping: [localhost] => (item="debian-instance registry username: None specified") 
+skipping: [localhost]
+
+TASK [Check presence of custom Dockerfiles] ************************************
+ok: [localhost] => (item=Dockerfile: None specified)
+ok: [localhost] => (item=Dockerfile: None specified)
+
+TASK [Create Dockerfiles from image names] *************************************
+skipping: [localhost] => (item="Dockerfile: None specified; Image: docker.io/jrei/systemd-ubuntu:latest") 
+skipping: [localhost] => (item="Dockerfile: None specified; Image: docker.io/geerlingguy/docker-debian11-ansible:latest") 
+skipping: [localhost]
+
+TASK [Discover local Podman images] ********************************************
+ok: [localhost] => (item=ubuntu-instance)
+ok: [localhost] => (item=debian-instance)
+
+TASK [Build an Ansible compatible image] ***************************************
+skipping: [localhost] => (item=docker.io/jrei/systemd-ubuntu:latest) 
+skipping: [localhost] => (item=docker.io/geerlingguy/docker-debian11-ansible:latest) 
+skipping: [localhost]
+
+TASK [Determine the CMD directives] ********************************************
+ok: [localhost] => (item="ubuntu-instance command: /sbin/init")
+ok: [localhost] => (item="debian-instance command: /sbin/init")
+
+TASK [Discover local podman networks] ******************************************
+skipping: [localhost] => (item=ubuntu-instance: None specified) 
+skipping: [localhost] => (item=debian-instance: None specified) 
+skipping: [localhost]
+
+TASK [Create podman network dedicated to this scenario] ************************
+skipping: [localhost]
+
+TASK [Create molecule instance(s)] *********************************************
+ok: [localhost] => (item=ubuntu-instance)
+ok: [localhost] => (item=debian-instance)
+
+TASK [Wait for instance(s) creation to complete] *******************************
+FAILED - RETRYING: [localhost]: Wait for instance(s) creation to complete (300 retries left).
+changed: [localhost] => (item=ubuntu-instance)
+changed: [localhost] => (item=debian-instance)
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=5    changed=1    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0
+
+INFO     Running podman_scenario > prepare
+WARNING  Skipping, prepare playbook not configured.
+INFO     Running podman_scenario > converge
+
+PLAY [Converge] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Download Vector] ******************************
+changed: [debian-instance]
+changed: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Install Vector] *******************************
+changed: [debian-instance]
+changed: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Create Vector config directory] ***************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Deploy Vector configuration] ******************
+changed: [debian-instance]
+changed: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Start Vector service] *************************
+changed: [debian-instance]
+changed: [ubuntu-instance]
+
+PLAY RECAP *********************************************************************
+debian-instance            : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ubuntu-instance            : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+INFO     Running podman_scenario > idempotence
+
+PLAY [Converge] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [ubuntu-instance]
+ok: [debian-instance]
+
+TASK [my_namespace.vector_role : Download Vector] ******************************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Install Vector] *******************************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Create Vector config directory] ***************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Deploy Vector configuration] ******************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Start Vector service] *************************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+PLAY RECAP *********************************************************************
+debian-instance            : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ubuntu-instance            : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+INFO     Idempotence completed successfully.
+INFO     Running podman_scenario > side_effect
+WARNING  Skipping, side effect playbook not configured.
+INFO     Running podman_scenario > verify
+INFO     Running Ansible Verifier
+
+PLAY [Verify Vector role] ******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [ubuntu-instance]
+ok: [debian-instance]
+
+TASK [Check if Vector configuration is valid without connecting to endpoints] ***
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [Check if Vector service is running] **************************************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [Verify Vector service is enabled] ****************************************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+PLAY RECAP *********************************************************************
+debian-instance            : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ubuntu-instance            : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+INFO     Verifier completed successfully.
+INFO     Running podman_scenario > cleanup
+WARNING  Skipping, cleanup playbook not configured.
+INFO     Running podman_scenario > destroy
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Destroy molecule instance(s)] ********************************************
+changed: [localhost] => (item={'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/jrei/systemd-ubuntu:latest', 'name': 'ubuntu-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']})
+changed: [localhost] => (item={'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/geerlingguy/docker-debian11-ansible:latest', 'name': 'debian-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']})
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+FAILED - RETRYING: [localhost]: Wait for instance(s) deletion to complete (300 retries left).
+changed: [localhost] => (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j640600839195.62705', 'results_file': '/home/stas/.ansible_async/j640600839195.62705', 'changed': True, 'item': {'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/jrei/systemd-ubuntu:latest', 'name': 'ubuntu-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']}, 'ansible_loop_var': 'item'})
+changed: [localhost] => (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j260336693295.62731', 'results_file': '/home/stas/.ansible_async/j260336693295.62731', 'changed': True, 'item': {'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/geerlingguy/docker-debian11-ansible:latest', 'name': 'debian-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']}, 'ansible_loop_var': 'item'})
+
+TASK [Delete podman network dedicated to this scenario] ************************
+skipping: [localhost] => (item=ubuntu-instance: None specified) 
+skipping: [localhost] => (item=debian-instance: None specified) 
+skipping: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+INFO     Pruning extra files from scenario ephemeral directory
+py310: OK ✔ in 2 minutes 55.87 seconds
+py311: commands[0]> molecule test --scenario-name podman_scenario
+WARNING  Driver podman does not provide a schema.
+INFO     podman_scenario scenario test matrix: dependency, cleanup, destroy, syntax, create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
+INFO     Performing prerun with role_name_check=0...
+WARNING  Another version of 'amazon.aws' 7.5.0 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py311/lib/python3.11/site-packages/ansible_collections, only the first one will be used, 9.4.0 (/home/stas/.ansible/collections/ansible_collections).
+WARNING  Another version of 'ansible.posix' 1.5.4 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py311/lib/python3.11/site-packages/ansible_collections, only the first one will be used, 2.0.0 (/home/stas/.ansible/collections/ansible_collections).
+WARNING  Another version of 'community.docker' 3.9.0 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py311/lib/python3.11/site-packages/ansible_collections, only the first one will be used, 4.5.2 (/home/stas/.ansible/collections/ansible_collections).
+WARNING  Another version of 'community.general' 8.6.0 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py311/lib/python3.11/site-packages/ansible_collections, only the first one will be used, 10.5.0 (/home/stas/.ansible/collections/ansible_collections).
+WARNING  Another version of 'community.library_inventory_filtering_v1' 1.0.1 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py311/lib/python3.11/site-packages/ansible_collections, only the first one will be used, 1.0.2 (/home/stas/.ansible/collections/ansible_collections).
+WARNING  Another version of 'containers.podman' 1.13.0 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py311/lib/python3.11/site-packages/ansible_collections, only the first one will be used, 1.16.3 (/home/stas/.ansible/collections/ansible_collections).
+WARNING  Another version of 'kubernetes.core' 2.4.2 was found installed in /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/.tox/py311/lib/python3.11/site-packages/ansible_collections, only the first one will be used, 5.2.0 (/home/stas/.ansible/collections/ansible_collections).
+INFO     Running podman_scenario > dependency
+WARNING  Skipping, missing the requirements file.
+WARNING  Skipping, missing the requirements file.
+INFO     Running podman_scenario > cleanup
+WARNING  Skipping, cleanup playbook not configured.
+INFO     Running podman_scenario > destroy
+INFO     Sanity checks: 'podman'
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Destroy molecule instance(s)] ********************************************
+changed: [localhost] => (item={'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/jrei/systemd-ubuntu:latest', 'name': 'ubuntu-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']})
+changed: [localhost] => (item={'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/geerlingguy/docker-debian11-ansible:latest', 'name': 'debian-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']})
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+changed: [localhost] => (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j523202193032.63083', 'results_file': '/home/stas/.ansible_async/j523202193032.63083', 'changed': True, 'item': {'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/jrei/systemd-ubuntu:latest', 'name': 'ubuntu-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']}, 'ansible_loop_var': 'item'})
+changed: [localhost] => (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j530851130375.63109', 'results_file': '/home/stas/.ansible_async/j530851130375.63109', 'changed': True, 'item': {'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/geerlingguy/docker-debian11-ansible:latest', 'name': 'debian-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']}, 'ansible_loop_var': 'item'})
+
+TASK [Delete podman network dedicated to this scenario] ************************
+skipping: [localhost] => (item=ubuntu-instance: None specified) 
+skipping: [localhost] => (item=debian-instance: None specified) 
+skipping: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+INFO     Running podman_scenario > syntax
+
+playbook: /home/stas/ansible/mnt-homeworks/08-ansible-05-testing/roles/my_namespace.vector_role/molecule/podman_scenario/converge.yml
+INFO     Running podman_scenario > create
+
+PLAY [Create] ******************************************************************
+
+TASK [Log into a container registry] *******************************************
+skipping: [localhost] => (item="ubuntu-instance registry username: None specified") 
+skipping: [localhost] => (item="debian-instance registry username: None specified") 
+skipping: [localhost]
+
+TASK [Check presence of custom Dockerfiles] ************************************
+ok: [localhost] => (item=Dockerfile: None specified)
+ok: [localhost] => (item=Dockerfile: None specified)
+
+TASK [Create Dockerfiles from image names] *************************************
+skipping: [localhost] => (item="Dockerfile: None specified; Image: docker.io/jrei/systemd-ubuntu:latest") 
+skipping: [localhost] => (item="Dockerfile: None specified; Image: docker.io/geerlingguy/docker-debian11-ansible:latest") 
+skipping: [localhost]
+
+TASK [Discover local Podman images] ********************************************
+ok: [localhost] => (item=ubuntu-instance)
+ok: [localhost] => (item=debian-instance)
+
+TASK [Build an Ansible compatible image] ***************************************
+skipping: [localhost] => (item=docker.io/jrei/systemd-ubuntu:latest) 
+skipping: [localhost] => (item=docker.io/geerlingguy/docker-debian11-ansible:latest) 
+skipping: [localhost]
+
+TASK [Determine the CMD directives] ********************************************
+ok: [localhost] => (item="ubuntu-instance command: /sbin/init")
+ok: [localhost] => (item="debian-instance command: /sbin/init")
+
+TASK [Discover local podman networks] ******************************************
+skipping: [localhost] => (item=ubuntu-instance: None specified) 
+skipping: [localhost] => (item=debian-instance: None specified) 
+skipping: [localhost]
+
+TASK [Create podman network dedicated to this scenario] ************************
+skipping: [localhost]
+
+TASK [Create molecule instance(s)] *********************************************
+ok: [localhost] => (item=ubuntu-instance)
+ok: [localhost] => (item=debian-instance)
+
+TASK [Wait for instance(s) creation to complete] *******************************
+FAILED - RETRYING: [localhost]: Wait for instance(s) creation to complete (300 retries left).
+changed: [localhost] => (item=ubuntu-instance)
+changed: [localhost] => (item=debian-instance)
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=5    changed=1    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0
+
+INFO     Running podman_scenario > prepare
+WARNING  Skipping, prepare playbook not configured.
+INFO     Running podman_scenario > converge
+
+PLAY [Converge] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Download Vector] ******************************
+changed: [ubuntu-instance]
+changed: [debian-instance]
+
+TASK [my_namespace.vector_role : Install Vector] *******************************
+changed: [debian-instance]
+changed: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Create Vector config directory] ***************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Deploy Vector configuration] ******************
+changed: [ubuntu-instance]
+changed: [debian-instance]
+
+TASK [my_namespace.vector_role : Start Vector service] *************************
+changed: [debian-instance]
+changed: [ubuntu-instance]
+
+PLAY RECAP *********************************************************************
+debian-instance            : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ubuntu-instance            : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+INFO     Running podman_scenario > idempotence
+
+PLAY [Converge] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Download Vector] ******************************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Install Vector] *******************************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Create Vector config directory] ***************
+ok: [ubuntu-instance]
+ok: [debian-instance]
+
+TASK [my_namespace.vector_role : Deploy Vector configuration] ******************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [my_namespace.vector_role : Start Vector service] *************************
+ok: [ubuntu-instance]
+ok: [debian-instance]
+
+PLAY RECAP *********************************************************************
+debian-instance            : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ubuntu-instance            : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+INFO     Idempotence completed successfully.
+INFO     Running podman_scenario > side_effect
+WARNING  Skipping, side effect playbook not configured.
+INFO     Running podman_scenario > verify
+INFO     Running Ansible Verifier
+
+PLAY [Verify Vector role] ******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [ubuntu-instance]
+ok: [debian-instance]
+
+TASK [Check if Vector configuration is valid without connecting to endpoints] ***
+ok: [ubuntu-instance]
+ok: [debian-instance]
+
+TASK [Check if Vector service is running] **************************************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+TASK [Verify Vector service is enabled] ****************************************
+ok: [debian-instance]
+ok: [ubuntu-instance]
+
+PLAY RECAP *********************************************************************
+debian-instance            : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ubuntu-instance            : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+INFO     Verifier completed successfully.
+INFO     Running podman_scenario > cleanup
+WARNING  Skipping, cleanup playbook not configured.
+INFO     Running podman_scenario > destroy
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Destroy molecule instance(s)] ********************************************
+changed: [localhost] => (item={'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/jrei/systemd-ubuntu:latest', 'name': 'ubuntu-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']})
+changed: [localhost] => (item={'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/geerlingguy/docker-debian11-ansible:latest', 'name': 'debian-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']})
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+FAILED - RETRYING: [localhost]: Wait for instance(s) deletion to complete (300 retries left).
+changed: [localhost] => (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j238428449770.76957', 'results_file': '/home/stas/.ansible_async/j238428449770.76957', 'changed': True, 'item': {'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/jrei/systemd-ubuntu:latest', 'name': 'ubuntu-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']}, 'ansible_loop_var': 'item'})
+changed: [localhost] => (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': 'j564577211146.76983', 'results_file': '/home/stas/.ansible_async/j564577211146.76983', 'changed': True, 'item': {'command': '/sbin/init', 'groups': ['vector_nodes'], 'image': 'docker.io/geerlingguy/docker-debian11-ansible:latest', 'name': 'debian-instance', 'pre_build_image': True, 'privileged': True, 'volumes': ['/sys/fs/cgroup:/sys/fs/cgroup:rw']}, 'ansible_loop_var': 'item'})
+
+TASK [Delete podman network dedicated to this scenario] ************************
+skipping: [localhost] => (item=ubuntu-instance: None specified) 
+skipping: [localhost] => (item=debian-instance: None specified) 
+skipping: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+INFO     Pruning extra files from scenario ephemeral directory
+  py310: OK (175.87=setup[0.03]+cmd[175.84] seconds)
+  py311: OK (174.78=setup[0.01]+cmd[174.77] seconds)
+  congratulations :) (350.69 seconds)
