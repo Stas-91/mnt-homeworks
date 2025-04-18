@@ -1,0 +1,303 @@
+*   [33m6320d99[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mMNT-video[m[33m, [m[1;31morigin/MNT-video[m[33m)[m Merge branch 'MNT-video' of https://github.com/Stas-91/mnt-homeworks into MNT-video
+[31m|[m[32m\[m  
+[31m|[m * [33meac8b5b[m Update README.md
+* [32m|[m [33m6887f67[m DZ -17-6
+[32m|[m[32m/[m  
+* [33med74092[m DZ 17-5
+* [33m8b9f8d1[m DZ 17-5
+* [33md5fab86[m DZ 17-5
+* [33m0b17a4d[m DZ 17-5
+* [33mb9d9add[m DZ 17-5
+* [33m399ed66[m upate readme
+* [33me6ca7a2[m update readme
+* [33mfb6a699[m 08-ansible-04-role
+* [33m48537ee[m 08-ansible-04-role
+* [33m3677d4b[m 08-ansible-04-role
+* [33m65c3c26[m 08-ansible-04-role
+* [33mfd71886[m 08-ansible-04-role
+* [33m35303b8[m 08-ansible-03-yandex
+* [33m76d7bcc[m 08-ansible-03-yandex
+* [33m988558e[m 08-ansible-03-yandex
+* [33m81151be[m Update README.md
+* [33me0e870a[m Add files via upload
+* [33m5b440ff[m update template vector
+* [33mab63e95[m 08-ansible-02-playbook
+* [33m42de5b9[m update REAMME.md
+* [33m9780784[m dz 17-2
+* [33m7f6dc73[m DZ 17-1
+* [33mcf7c37b[m Update tox-requirements.txt
+* [33m6facc1c[m Update README.md
+* [33ma706021[m Update README.md
+* [33m5e8ab65[m Update README.md
+* [33m4ea2152[m Update README.md
+* [33md1adf63[m Update README.md
+* [33m3bc7795[m Update README.md
+* [33ma3e373f[m Update README.md
+* [33m4f1205b[m Update README.md
+* [33m0df6627[m Update README.md
+* [33m4f6b1f6[m Update README.md
+* [33m4fb6723[m Update README.md
+* [33m9b9f63e[m Update README.md
+* [33me406e4e[m Update README.md
+* [33mddc5daa[m Update README.md
+* [33ma12a08f[m Update README.md
+* [33m78bf5af[m Update README.md
+* [33mba059cd[m Update README.md
+* [33mffbf426[m Update README.md
+* [33m74007ce[m Update README.md
+* [33m50be53f[m Update README.md
+* [33m924aadf[m Update README.md
+* [33mb332fc0[m Update README.md
+* [33mb141b8f[m Update README.md
+* [33mabd8973[m Update README.md
+* [33m9d78447[m Update README.md
+* [33m779bb10[m Update tox-requirements.txt
+*   [33m4ee126c[m Merge branch 'MNT-video' of github.com:netology-code/mnt-homeworks into MNT-video
+[33m|[m[34m\[m  
+[33m|[m * [33m668e765[m Update README.md
+[33m|[m * [33meb6ed67[m Update README.md
+[33m|[m * [33m601e5f1[m Update logstash.conf
+[33m|[m * [33m058cea3[m Update logstash.conf
+[33m|[m * [33m567b12d[m Update docker-compose.yml
+[33m|[m * [33m48fb291[m Update docker-compose.yml
+[33m|[m * [33m686dc7c[m Update README.md
+[33m|[m * [33mc9630fa[m Delete README.md
+[33m|[m * [33m917b021[m Update README.md
+[33m|[m * [33mc57515a[m Update README.md
+[33m|[m * [33m6c535fb[m Update README.md
+[33m|[m * [33m30c19e0[m Update README.md
+[33m|[m * [33mef85615[m Update README.md
+[33m|[m * [33m3856f57[m Update README.md
+[33m|[m *   [33m7d84f2d[m Merge pull request #11 from udjin10/patch-1
+[33m|[m [35m|[m[36m\[m  
+[33m|[m [35m|[m * [33mcdcf716[m fix filebeat command command:-strict.perms=false
+[33m|[m [35m|[m * [33m739f93c[m Update filebeat.yml
+[33m|[m [35m|[m * [33m7cb1f21[m Update logstash.conf
+[33m|[m [35m|[m * [33mb5afadd[m Update docker-compose.yml
+[33m|[m [35m|[m[35m/[m  
+[33m|[m * [33m6e89c46[m Update docker-compose.yml
+[33m|[m * [33mb629392[m Update docker-compose.yml
+[33m|[m * [33m0572931[m Update README.md
+[33m|[m * [33m57fb824[m Update README.md
+[33m|[m * [33m8c6ce93[m Update README.md
+* [36m|[m [33m02e3301[m update key for jenkins
+[36m|[m[36m/[m  
+* [33m40c4c33[m additional about jenkins
+* [33mc23edad[m fix naming
+* [33me26bb61[m more additional content
+* [33m7d00d37[m Update README.md
+* [33mbc7754a[m Update README.md
+* [33m29f80c6[m Update README.md
+* [33m4df263a[m UPD_TXT
+* [33meb46487[m Update README.md
+* [33mb4cf37c[m Update README.md
+* [33m466d964[m Update README.md
+* [33m80e1cfd[m add flush handlers
+* [33mbde2628[m Update README.md
+* [33m8c6bd6c[m Update README.md
+* [33mf5d663c[m Update README.md
+* [33m0f0360b[m Update README.md
+* [33m7ee6d54[m Update README.md
+* [33m212c188[m Update README.md
+* [33m8fca9d5[m Update README.md
+* [33m75a9dc5[m Update README.md
+* [33m2ec48da[m Update README.md
+* [33m15311f9[m Update README.md
+* [33mc0358ac[m Update README.md
+* [33m907fd29[m Update README.md
+* [33m6abccb2[m Update README.md
+* [33me32b551[m Update README.md
+* [33mdc9a9c6[m Update README.md
+* [33m10e6649[m Update README.md
+* [33m984f4fb[m Update README.md
+* [33m53dcc35[m Update README.md
+* [33m033bcb0[m Update README.md
+* [33m7f6d226[m Update README.md
+* [33m7e76155[m Update README.md
+* [33m36e75fc[m Update README.md
+* [33m4417fde[m Update README.md
+* [33m5544b1f[m Update README.md
+* [33m8d772f3[m Update README.md
+* [33m5bacaf1[m Update README.md
+* [33m1c11e76[m Update README.md
+* [33m693cd61[m Update README.md
+* [33m375638c[m Update README.md
+* [33m1e49ac2[m Update README.md
+* [33m2a9f1db[m Update README.md
+* [33m1cfa62c[m Update README.md
+* [33mbc04c7e[m Update README.md
+* [33mc93dd68[m Update README.md
+* [33mf7c1686[m Update README.md
+* [33md254f68[m Update tox-requirements.txt
+* [33m9359c79[m Update README.md
+* [33m6bcd190[m Update README.md
+* [33m2a851be[m Update README.md
+* [33m0d45dff[m Update README.md
+* [33me439dcd[m Update README.md
+* [33m3a607ce[m Update README.md
+* [33m8d1f2e7[m Delete Dockerfile
+* [33m09a81b7[m Update README.md
+* [33me263278[m Update README.md
+* [33m75b299c[m Update README.md
+* [33mc03f91b[m Update README.md
+* [33m3d8d35f[m Update README.md
+* [33mc540adb[m Update README.md
+* [33m060b12f[m Update README.md
+* [33mc73f7bf[m Update README.md
+* [33made2c99[m Update README.md
+* [33mc479bc1[m Update README.md
+* [33m2e81ea8[m Update README.md
+* [33mfa6ec3b[m Update README.md
+* [33m1a644f7[m Update README.md
+* [33m1983930[m Update README.md
+* [33m7c052e5[m Update README.md
+* [33m4181d90[m Update README.md
+* [33m7439851[m Update README.md
+* [33me4b20f4[m Update README.md
+* [33mc58c3ff[m Update README.md
+* [33m82dba2f[m fix all hw
+* [33m1aaff0d[m modify 04 and 05
+* [33m9a32839[m Update README.md
+* [33maa2bace[m Update README.md
+* [33mad8c31d[m Update README.md
+* [33m55bad75[m Update README.md
+* [33mdb9e425[m Update README.md
+* [33mdb25d30[m Update README.md
+* [33m927f114[m Update README.md
+* [33mfee76de[m Update README.md
+* [33m4df2f16[m Update python-api.py
+* [33mcf15a4a[m Update README.md
+* [33mce42f72[m add settings.xml
+*   [33m9763253[m Merge branch 'MNT-7' of https://github.com/netology-code/mnt-homeworks into MNT-7
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33medb39df[m Update README.md
+[1;31m|[m * [33mc778e21[m Update README.md
+[1;31m|[m * [33m9e5114a[m Update README.md
+* [1;32m|[m [33m788b5a2[m fix 05 homework
+[1;32m|[m[1;32m/[m  
+* [33m96b2d18[m fix homework jenkins
+* [33m02dfba7[m fix homework
+* [33m9e1493c[m fix readme
+*   [33mf95758e[m Merge branch 'MNT-7' of https://github.com/netology-code/mnt-homeworks into MNT-7
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33m103a597[m Update README.md
+[1;33m|[m * [33mad301e9[m Update README.md
+[1;33m|[m * [33m5c4472e[m убрал опечатку
+* [1;34m|[m [33ma3a61b1[m fix certs
+* [1;34m|[m [33m8458c77[m fix space
+[1;34m|[m[1;34m/[m  
+* [33me1ff1e2[m fix 03 homework
+* [33m358727d[m add 02 homework
+* [33m15b1b6e[m add ansible install
+* [33m2aac3c3[m add jenkins_agent play
+* [33m04032d7[m add jenkins playbook
+* [33m0bf813f[m add nexus play
+* [33m9198515[m add sonar play
+*   [33m5b57854[m Merge branch 'MNT-7' of https://github.com/netology-code/mnt-homeworks into MNT-7
+[1;35m|[m[1;36m\[m  
+[1;35m|[m * [33md16bb16[m Update README.md
+* [1;36m|[m [33m186876c[m minor fix molecule version
+[1;36m|[m[1;36m/[m  
+*   [33mbec8fd2[m Merge branch 'MNT-7' of https://github.com/netology-code/mnt-homeworks into MNT-7
+[31m|[m[32m\[m  
+[31m|[m * [33m636d3a4[m Update README.md
+[31m|[m * [33ma741525[m Update README.md
+[31m|[m * [33mf8dd9e8[m Update README.md
+* [32m|[m [33m762134a[m bump jdk version
+[32m|[m[32m/[m  
+* [33m623d05c[m fix docker
+* [33m2318d0a[m rework 05 ansible
+* [33mfb74e2b[m add rework homework
+* [33mc8c0a0e[m add rework homework
+* [33m8854cad[m Update README.md
+*   [33me458855[m Merge pull request #3 from aak74/patch-1
+[33m|[m[34m\[m  
+[33m|[m * [33ma0d10bb[m typo
+* [34m|[m [33mc36c358[m fix ansible-lint
+* [34m|[m [33ma452d64[m change playbook to 11 java naiming
+[34m|[m[34m/[m  
+* [33m0f40381[m Update README.md
+* [33m5f049be[m Update README.md
+* [33m8a4d525[m Update README.md
+* [33m0e1717e[m Update README.md
+* [33mf8172f3[m Update README.md
+* [33mecd3c29[m Update README.md
+* [33m32c8705[m Update README.md
+* [33m501a971[m Update README.md
+* [33m7925779[m Update README.md
+* [33mf37c3d5[m Update README.md
+* [33me15ed52[m Update README.md
+* [33m0219068[m Update README.md
+* [33m1b07ed2[m Update README.md
+* [33m1d0c7ba[m Update README.md
+* [33mb478990[m Update README.md
+* [33m54bdedc[m Update README.md
+*   [33mbdc870a[m Merge branch 'master' of https://github.com/netology-code/mnt-homeworks
+[35m|[m[36m\[m  
+[35m|[m * [33mb5bb1b6[m Update README.md
+* [36m|[m [33m20ade04[m fix link
+[36m|[m[36m/[m  
+* [33m31841de[m fix upload elastic task
+* [33m4b11c0e[m add gitlab homework
+* [33mf6decce[m add teamcity homework
+* [33m9f8532e[m add whole homework
+* [33mc7ae17d[m draft homework
+* [33m66cc208[m add 09-02 homework
+* [33mcba5617[m add info about xml
+* [33mb8b5f52[m add ci
+* [33m05776b6[m 10-6 исправил ссылку на ютуб
+* [33m5e2446d[m Добавлено ДЗ по инцидент-менеджменту
+* [33m86f01cd[m Update README.md
+* [33m019f5ad[m Update README.md
+* [33md103897[m Update README.md
+* [33m8351bbb[m Update README.md
+* [33m31aa305[m Update README.md
+* [33m0d3511b[m Update README.md
+* [33m58a9651[m Update README.md
+* [33m009826b[m Update README.md
+* [33me01b7a1[m Update README.md
+* [33m1e185dc[m Небольшое правки 10-5
+* [33m831a0f2[m Добавил ДЗ по sentry
+* [33mdde9b56[m Добавил дз по ELK
+* [33m3fe7fb0[m Добавил ДЗ по 10-3
+* [33mf783e68[m Поправил 10-2
+* [33m7cdfa7e[m Поправил номер задачи
+* [33m5cd04a0[m ДЗ 10-2
+* [33m37c75bf[m update header
+* [33m7244718[m update header
+*   [33m99a42c3[m Merge branch 'master' of https://github.com/netology-code/mnt-homeworks
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33m207cec9[m Update README.md
+[1;31m|[m * [33m69a1edc[m Update README.md
+* [1;32m|[m [33m9d7bc08[m add homework
+[1;32m|[m[1;32m/[m  
+* [33me3638be[m add role to homework
+* [33m5a3b2d4[m add homework 03
+* [33mee4567d[m fix homework
+* [33m8a39b04[m add homework
+*   [33m2b1a1ff[m Merge branch 'master' of https://github.com/netology-code/mnt-homeworks
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33ma90ac14[m Update README.md
+* [1;34m|[m [33m0fb3332[m add homework to 08-02
+[1;34m|[m[1;34m/[m  
+* [33m7b0abbb[m add homework
+* [33m13c14d5[m add aditional
+* [33m0dfba8f[m add homework
+*   [33md04aa53[m Merge branch 'master' of https://github.com/netology-code/mnt-homeworks
+[1;35m|[m[1;36m\[m  
+[1;35m|[m * [33m6c0de1a[m Update README.md
+[1;35m|[m * [33m6910dab[m Update README.md
+[1;35m|[m * [33mfd6f9ab[m Update README.md
+* [1;36m|[m [33m219c330[m add ansible
+[1;36m|[m[1;36m/[m  
+* [33m1a44554[m Update README.md
+* [33m96e95d7[m Update README.md
+*   [33m25e3804[m Merge pull request #1 from roch1990/master
+[31m|[m[32m\[m  
+[31m|[m * [33mc3824ca[m Добавил ссылку на ДЗ:10.01 из основного readme
+[31m|[m * [33ma6e1459[m 10.01 добавил ДЗ
+* [32m|[m [33md0f6891[m Update README.md
+* [32m|[m [33mb5b3d63[m Update README.md
+[32m|[m[32m/[m  
+* [33m0781912[m Update README.md
+* [33m0cc0dbe[m Initial commit
