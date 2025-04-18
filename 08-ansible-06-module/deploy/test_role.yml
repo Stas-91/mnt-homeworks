@@ -4,4 +4,3 @@
     - role: my_own_namespace.yandex_cloud_elk.create_text_file
       my_test_path: /tmp/testfile.txt
       my_test_content: Hello, this is a test file from the role
-
