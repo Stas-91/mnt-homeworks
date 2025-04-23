@@ -1,11 +1,5 @@
-# Домашнее задание к занятию 7 «Жизненный цикл ПО»
+# Домашнее задание к занятию 7 «Жизненный цикл ПО» Помельников Станислав
 
-## Подготовка к выполнению
-
-1. Получить бесплатную версию Jira - https://www.atlassian.com/ru/software/jira/work-management/free (скопируйте ссылку в адресную строку). Вы можете воспользоваться любым(в том числе бесплатным vpn сервисом) если сайт у вас недоступен. Кроме того вы можете скачать [docker образ](https://hub.docker.com/r/atlassian/jira-software/#) и запустить на своем хосте self-managed версию jira.
-2. Настроить её для своей команды разработки.
-3. Создать доски Kanban и Scrum.
-4. [Дополнительные инструкции от разработчика Jira](https://support.atlassian.com/jira-cloud-administration/docs/import-and-export-issue-workflows/).
 
 ## Основная часть
 
@@ -36,10 +30,21 @@
 1. Перейдите в Scrum, запланируйте новый спринт, состоящий из задач эпика и одного бага, стартуйте спринт, проведите задачи до состояния Closed. Закройте спринт.
 2. Если всё отработалось в рамках ожидания — выгрузите схемы workflow для импорта в XML. Файлы с workflow и скриншоты workflow приложите к решению задания.
 
+### Решение
+
+https://github.com/Stas-91/mnt-homeworks/blob/MNT-video/09-ci-01-intro/bug.xml  
+https://github.com/Stas-91/mnt-homeworks/blob/MNT-video/09-ci-01-intro/simple%20workflow.xml  
+
+![18-1](https://github.com/Stas-91/mnt-homeworks/blob/MNT-video/09-ci-01-intro/18-1-1.jpg)
+![18-1](https://github.com/Stas-91/mnt-homeworks/blob/MNT-video/09-ci-01-intro/18-1-2.jpg)
 ---
+
+
 
 ### Как оформить решение задания
 
 Выполненное домашнее задание пришлите в виде ссылки на .md-файл в вашем репозитории.
 
 ---
+
+### Решение
