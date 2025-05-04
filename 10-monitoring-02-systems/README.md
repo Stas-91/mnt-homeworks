@@ -90,12 +90,13 @@ _____
 _____
 7. Склонируйте себе [репозиторий](https://github.com/influxdata/sandbox/tree/master) и запустите TICK-стэк, 
 используя технологии docker и docker-compose.
-
 В виде решения на это упражнение приведите скриншот веб-интерфейса ПО chronograf (`http://localhost:8888`). 
 
 P.S.: если при запуске некоторые контейнеры будут падать с ошибкой - проставьте им режим `Z`, например
 `./data:/var/lib:Z`
-#
+### Решение 7
+![7](https://github.com/Stas-91/mnt-homeworks/blob/MNT-video/10-monitoring-02-systems/19-1-7.jpg)
+_____
 8. Перейдите в веб-интерфейс Chronograf (http://localhost:8888) и откройте вкладку Data explorer.
         
     - Нажмите на кнопку Add a query
@@ -104,7 +105,9 @@ P.S.: если при запуске некоторые контейнеры б�
     - Вверху вы можете увидеть запрос, аналогичный SQL-синтаксису. Поэкспериментируйте с запросом, попробуйте изменить группировку и интервал наблюдений.
 
 Для выполнения задания приведите скриншот с отображением метрик утилизации cpu из веб-интерфейса.
-#
+### Решение 8
+![8](https://github.com/Stas-91/mnt-homeworks/blob/MNT-video/10-monitoring-02-systems/19-1-8.jpg)
+_____
 9. Изучите список [telegraf inputs](https://github.com/influxdata/telegraf/tree/master/plugins/inputs). 
 Добавьте в конфигурацию telegraf следующий плагин - [docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker):
 ```
@@ -133,6 +136,10 @@ P.S.: если при запуске некоторые контейнеры б�
 веб-интерфейсе базы telegraf.autogen . Там должны появиться метрики, связанные с docker.
 
 Факультативно можете изучить какие метрики собирает telegraf после выполнения данного задания.
+### Решение 9
+![9](https://github.com/Stas-91/mnt-homeworks/blob/MNT-video/10-monitoring-02-systems/19-1-9.jpg)
+_____
+
 
 ## Дополнительное задание (со звездочкой*) - необязательно к выполнению
 
