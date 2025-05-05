@@ -26,7 +26,7 @@
 1. Подключите поднятый вами prometheus, как источник данных.
 1. Решение домашнего задания — скриншот веб-интерфейса grafana со списком подключенных Datasource.
 ### Решение 1
-
+![1](https://github.com/Stas-91/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/19-2-1.jpg)
 ---
 ## Задание 2
 
@@ -52,6 +52,8 @@
 - CPU Load Average (15 минут) - ```node_load15```
 - Количество свободной оперативной памяти (в байтах) - ```node_memory_MemAvailable_bytes```
 - Количество свободного места на файловой системе (в байтах, для корневого раздела) - ```node_filesystem_free_bytes{mountpoint="/"}```
+
+![2](https://github.com/Stas-91/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/19-2-2.jpg)
 ---
 
 ## Задание 3
@@ -59,7 +61,7 @@
 1. Создайте для каждой Dashboard подходящее правило alert — можно обратиться к первой лекции в блоке «Мониторинг».
 1. В качестве решения задания приведите скриншот вашей итоговой Dashboard.
 ### Решение 3
-
+![3](https://github.com/Stas-91/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/19-2-3.jpg)
 ---
 ## Задание 4
 
@@ -67,7 +69,7 @@
 1. В качестве решения задания приведите листинг этого файла.
 ### Решение 4
 
-
+[dashboard.json](https://github.com/Stas-91/mnt-homeworks/blob/MNT-video/10-monitoring-03-grafana/dashboard.json)
 ---
 
 ### Как оформить решение задания
